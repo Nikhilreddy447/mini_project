@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rice Plant Disease Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Rice Plant Disease Detection</h1>
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" name="file">
+            <button type="submit">Upload</button>
+        </form>
+        {% if prediction %}
+            <h2>Prediction: {{ prediction }}</h2>
+            <img src="{{ url_for('send_file', filename=filename) }}" alt="Uploaded Image">
+            <ul>
+                {% for i, probability in enumerate(probabilities) %}
+                    <li>{{ index_to_class[i] }}: {{ '%.2f'|format(probability * 100) }}%</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</body>
+</html>
