@@ -10,7 +10,7 @@
     <div class="container">
         <h1>Rice Plant Disease Detection</h1>
         <form method="post" enctype="multipart/form-data">
-            <input type="file" name="file">
+            <input type="file" name="file" accept="image/*">
             <button type="submit">Upload</button>
         </form>
         {% if prediction %}
@@ -21,6 +21,7 @@
                     <li>{{ index_to_class[i] }}: {{ '%.2f'|format(probability * 100) }}%</li>
                 {% endfor %}
             </ul>
+            <h2>Severity: {{ severity }}</h2>
         {% endif %}
     </div>
 </body>
